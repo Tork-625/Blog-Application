@@ -1,0 +1,75 @@
+<%- include("partials/header", {isLoggedIn: isLoggedIn}) -%> 
+
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Delete Post</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to delete this post? The changes made will be permanent and cannot be undone.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">CLOSE</button>
+        <form  action="/posts/<%= post.blogType %>/<%= post._id %>?_method=DELETE" method="POST" class="d-inline">
+          <button type="submit" class="btn btn-danger">CONFIRM</button>
+        </form> 
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid">
+  <div>
+    <h1><%= post.blogTitle %></h1>
+  </div>
+  <% if(isLoggedIn && isAuthor){ %>
+    <div>
+      <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" type="button">DELETE</button>
+      <form action="/posts/edit/<%= post.blogType %>/<%= post._id %>"  class="d-inline">
+        <button class="btn btn-warning" type="submit">EDIT</button>
+      </form>
+    </div>
+  <% } %>
+
+  <hr />
+  <% if(post.blogAuthorName === undefined){ %>
+    <p>
+        <span class="fst-italic">
+            This post was created on
+        </span>  
+        <span class="fw-semibold fst-italic">
+            <%= post.blogDate %>
+        </span> 
+      </p>
+  <% } else {%>
+    <p>
+        <span class="fw-semibold fst-italic">
+            <%= post.blogAuthorName %>
+        </span> 
+        <span class="fst-italic">
+            on The Daily Journal
+        </span> 
+        <span class="fw-semibold fst-italic">
+            <%= post.blogDate %>
+        </span> 
+      </p>
+    <% } %>
+  
+  <hr />
+  <div class="content-image-div">
+    <img
+    class="img-fluid rounded mx-auto d-block"
+    src="/images/<%= post.blogImage %>"
+    alt="PostImage"
+  />
+  </div>
+  <div class="content-div">
+    <p class="text-break"><%- post.sanitizedContent %></p>
+  </div>
+
+</div>
+
+
+<%- include("partials/footer") -%>

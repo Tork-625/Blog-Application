@@ -1,0 +1,49 @@
+<%- include("partials/header", {isLoggedIn: isLoggedIn}) -%>    
+
+<form action="/posts/compose" method="Post" enctype="multipart/form-data"> 
+    <div class="mb-3">
+      <label for="title" class="form-label">Title</label>
+      <input required type="text" id="title" name="blogTitle" class="form-control" />
+    </div>
+    <div class="mb-3">
+      <label for="image" class="form-label">Image</label>
+      <input required type="file" id="image" name="blogImage" class="form-control" />
+    </div>
+    <div class="mb-3">
+      <label for="description" class="form-label">Description</label>
+      <textarea
+        name="blogDesc"
+        id="description"
+        cols="5"
+        rows="5"
+        class="form-control"
+        required
+        wrap="hard"
+        minlength="10"
+      ></textarea>
+    </div>
+    <div class="mb-3">
+      <label for="content" class="form-label">Post</label>
+      <textarea
+        name="blogContent"
+        id="content"
+        cols="10"
+        rows="10"
+        class="form-control"
+        required
+        wrap="hard"
+        minlength="10"
+      ></textarea>
+    </div>
+    <div class="mb-3">
+      <label for="postType" class="form-label">Post Type</label>
+      <select required name="typeOfPost" id="postType" class="form-control">
+        <option value="Public">Public</option>
+        <option value="Private">Private</option>
+      </select>
+    </div>
+  
+    <button type="submit" class="btn btn-success">Submit</button>
+</form>
+
+<%- include("partials/footer") -%>

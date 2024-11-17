@@ -1,0 +1,71 @@
+<%- include("partials/header", {isLoggedIn: isLoggedIn}) -%>   
+
+<main class="form-signin w-100 m-auto signin-login-form">
+    <form action="<%= postTo %>" method="POST">
+      <img class="mb-4" src="/site-images/DailyJournalFavicon.png" alt="" width="72" height="72" />
+      <h1 class="h3 mb-3 fw-normal"><%= textToDisplay %></h1>
+  
+      <div class="form-floating">
+        <input
+          type="email"
+          class="form-control"
+          id="floatingInput"
+          placeholder="name@example.com"
+          name="username"
+          required
+        />
+        <label for="floatingInput">Email address</label>
+      </div>
+      <% if(textToDisplay === "Signup"){ %>
+      <div class="form-floating">
+        <input
+          type="text"
+          class="form-control"
+          id="floatingInput"
+          placeholder="Full Name"
+          name="authorName"
+          required
+        />
+        <label for="floatingInput">Full Name</label>
+      </div>
+      <% } %>
+      <div class="form-floating">
+        <input
+          type="password"
+          class="form-control"
+          id="floatingPassword"
+          placeholder="Password"
+          name="password"
+          required
+          minlength="8"
+        />
+        <label for="floatingPassword">Password</label>
+      </div>
+      <button class="w-100 btn btn-lg btn-outline-dark" type="submit">
+        <%= textToDisplay %>
+      </button>
+      <p class="mb-3" style="margin: 20px">OR</p>
+  
+      <a
+        class="btn btn-block btn-google w-100 btn-lg"
+        href="/auth/google"
+        role="button"
+        style="text-align: center"
+      >
+        <i class="fab fa-google" style="margin-right: 10px"></i>
+        <%= textToDisplay %> with Google
+      </a>
+  
+      <% if(textToDisplay === "Login"){ %>
+      <p class="mt-5 mb-3 text-muted">
+        Don't have an account? <a href="/users/signup">Create an account</a> instead.
+      </p>
+      <% } %> <% if(textToDisplay === "Signup"){ %>
+      <p class="mt-5 mb-3 text-muted">
+        Already have an account? <a href="/users/login">Login</a> instead.
+      </p>
+      <% } %>
+    </form>
+</main>
+
+<%- include("partials/footer") -%>

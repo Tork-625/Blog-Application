@@ -1,0 +1,38 @@
+<%- include("partials/header", {isLoggedIn: isLoggedIn}) -%>    
+
+<% if(posts.length > 0){ %>
+  <div class="p-4 p-md-5 mb-4 rounded text-bg-dark featured-div">
+    <div class="col-md-6 px-0">
+      <h1 class="display-4 fst-italic"><%= posts[0].blogTitle %></h1>
+      <p class="lead my-3"><%= posts[0].blogDescription.substring(0, 199) %>....</p>
+      <p class="lead mb-0"><a href="posts/publicPosts/<%= posts[0]._id %>" class="text-white fw-bold">Continue reading...</a></p>
+    </div>
+  </div>
+<% } %>
+<% posts.forEach((post, index) => { %>
+  <% if(index < 1){ %>
+    <% return; %>
+  <% } else {%>
+    <div class="card mb-3">
+      <div class="row g-0">
+        <div class="col-md-4">
+          <img src="/images/<%= post.blogImage %>" style="height: 240px;  width: 100%;" class="img-fluid rounded-start" alt="..." />
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title"><%= post.blogTitle %></h5>
+            <p class="card-text"><%= post.blogDescription.substring(0, 199) %>....</p>
+            <p class="card-text">
+              <small class="text-muted"><%= post.blogDate %></small>
+            </p>
+            <a class="btn btn-outline-dark" href="posts/publicPosts/<%= post._id%>"
+              >Read More</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  <% } %>
+<% }); %> 
+
+<%- include("partials/footer") -%>

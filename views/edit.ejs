@@ -1,0 +1,44 @@
+<%- include("partials/header", {isLoggedIn: isLoggedIn}) -%>
+
+<form action="/posts/edit/<%= post.blogType %>/<%= post._id %>?_method=PATCH" method="POST">
+  <div class="mb-3">
+    <label for="title" class="form-label">Title</label>
+    <input
+      required
+      type="text"
+      id="title"
+      name="blogTitle"
+      class="form-control"
+      value="<%= post.blogTitle %>"
+    />
+  </div>
+  <div class="mb-3">
+    <label for="description" class="form-label">Description</label>
+    <textarea
+      name="blogDesc"
+      id="description"
+      cols="5"
+      rows="5"
+      class="form-control"
+      required
+      wrap="hard"
+      minlength="10"
+    ><%= post.blogDescription %></textarea>
+  </div>
+  <div class="mb-3">
+    <label for="content" class="form-label">Post</label>
+    <textarea
+      name="blogContent"
+      id="content"
+      cols="10"
+      rows="10"
+      class="form-control"
+      required
+      wrap="hard"
+      minlength="10"
+    ><%= post.blogContent %></textarea>
+  </div>
+  <button type="submit" class="btn btn-success">Submit</button>
+</form>
+
+<%- include("partials/footer") -%>

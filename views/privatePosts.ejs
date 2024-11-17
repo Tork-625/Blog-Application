@@ -1,0 +1,28 @@
+<%- include("partials/header", {isLoggedIn: isLoggedIn}) -%>   
+
+<% if(posts.length === 0){ %>
+<div class="error-container">
+  <div class="error-head">
+    <h1>No Posts To Show</h1>
+  </div>
+</div>
+<% } %>
+    
+<div class="row">
+    <% posts.forEach((post) => { %>
+      <div class="col-md-6 col-xs-12 col-lg-4 col-xl-3" style="margin-bottom: 20px;">
+        <div class="card h-100">
+          <img src="/images/<%= post.blogImage %>" class="card-img-top" alt="..." style="height: 200px;" />
+          <div class="card-body">
+             <h5 class="card-title"><%= post.blogTitle %></h5>
+            <h6 class="card-text mb-2 text-muted"><%= post.blogDate %></h6>
+            <p class="card-text" style="height: 100px;"><%= post.blogDescription.substring(0, 99) %>...</p>
+            <a href="/posts/privatePosts/<%= post._id%>" class="btn btn-dark privatePostButton " >Read More</a>
+          </div>
+        </div>
+      </div>
+    <% }); %>
+</div>
+
+
+<%- include("partials/footer") -%>
